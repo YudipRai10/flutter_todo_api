@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api/screens/todo_list_screen.dart';
+import 'package:flutter_api/bloc/auth_bloc.dart';
+import 'package:flutter_api/pallete.dart';
+import 'package:flutter_api/screens/login_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,12 +14,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData.dark(),
-      // home: const Home(title: 'Flutter Demo Home Page'),
-      home: TodoList(),
+    return BlocProvider(
+      create: (context) => AuthBloc(),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData.dark().copyWith(
+          scaffoldBackgroundColor: Pallete.backgroundColor,
+        ),
+        home: const LoginScreen(),
+      ),
     );
   }
 }
